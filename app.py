@@ -7,33 +7,19 @@ st.markdown("### Troubleshooting Durex / Extender Oil Flow Issues")
 
 st.info("This dashboard outlines common flow restrictions, root causes, and corrective actions for rubber process oil injection systems.")
 
-# Interactive Selector for Quick Diagnosis
-selected_issue = st.selectbox(
-    "Select an issue to inspect:",
-    [
-        "1. Low Oil Temperature / High Viscosity",
-        "2. Premature Absorption or Blockage",
-        "3. Air Pockets or Cavitation",
-        "4. Incorrect Injection Timing"
-    ]
-)
+# Troubleshooting Sections
+st.subheader("1. Low Oil Temperature / High Viscosity")
+st.write("**Cause:** Process oil becomes too thick if ambient or line temperatures drop, preventing smooth pumping.")
+st.success("**Fix:** Check line heaters and trace heating to maintain target fluid temperatures.")
 
-if "Low Oil Temperature" in selected_issue:
-    st.subheader("1. Low Oil Temperature / High Viscosity")
-    st.write("**Cause:** Process oil becomes too thick if ambient or line temperatures drop, preventing smooth pumping.")
-    st.success("**Fix:** Check line heaters and trace heating to maintain target fluid temperatures.")
+st.subheader("2. Premature Absorption or Blockage")
+st.write("**Cause:** Injection nozzles positioned too close to hot mixing zones cause rubber-oil caking and carbon black buildup.")
+st.success("**Fix:** Purge and clean the injection port regularly.")
 
-elif "Premature Absorption" in selected_issue:
-    st.subheader("2. Premature Absorption or Blockage")
-    st.write("**Cause:** Injection nozzles positioned too close to hot mixing zones cause rubber-oil caking and carbon black buildup.")
-    st.success("**Fix:** Purge and clean the injection port regularly.")
+st.subheader("3. Air Pockets or Cavitation")
+st.write("**Cause:** Trapped air or foaming in the supply lines creates erratic positive displacement or gear pump delivery.")
+st.success("**Fix:** Bleed supply lines to remove trapped air pockets and restore uniform pressure.")
 
-elif "Air Pockets" in selected_issue:
-    st.subheader("3. Air Pockets or Cavitation")
-    st.write("**Cause:** Trapped air or foaming in the supply lines creates erratic positive displacement or gear pump delivery.")
-    st.success("**Fix:** Bleed supply lines to remove trapped air pockets and restore uniform pressure.")
-
-elif "Incorrect Injection Timing" in selected_issue:
-    st.subheader("4. Incorrect Injection Timing")
-    st.write("**Cause:** Oil injected too early or late in the mixing cycle abruptly alters batch viscosity.")
-    st.success("**Fix:** Verify PLC sequence triggers oil injection only after proper initial breakdown of polymers and fillers.")
+st.subheader("4. Incorrect Injection Timing")
+st.write("**Cause:** Oil injected too early or late in the mixing cycle abruptly alters batch viscosity.")
+st.success("**Fix:** Verify PLC sequence triggers oil injection only after proper initial breakdown of polymers and fillers.")
