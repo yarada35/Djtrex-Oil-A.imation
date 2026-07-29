@@ -15,13 +15,10 @@ image_filename = "banbury_grid.png"
 if os.path.exists(image_filename):
     st.image(image_filename, caption="Process Oil Pumping & Troubleshooting Matrix", use_column_width=True)
 else:
-    # Embedded direct HTML container showing the image right away if present in local folder, or the upload instruction box
+    # Pure CSS/HTML fallback that completely hides the broken missing image icon box while showing the clear tip
     st.markdown(f"""
-    <div style="text-align: center; margin-bottom: 15px;">
-        <img src="{image_filename}" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);" onerror="this.style.display='none'">
-    </div>
-    <div style="padding: 15px; background-color: #1a1c23; border-radius: 8px; border: 1px solid #4f4f5f; text-align: center;">
-        <p style="color: #ffcc00; font-size: 13px; margin: 0;"><b>Tip:</b> Make sure your image file is named <b>banbury_grid.png</b> and committed to your GitHub repository root folder.</p>
+    <div style="padding: 15px; background-color: #1a1c23; border-radius: 8px; border: 1px solid #4f4f5f; text-align: center; margin-bottom: 20px;">
+        <p style="color: #ffcc00; font-size: 13px; margin: 0;"><b>Tip:</b> Make sure your image file is named <b>banbury_grid.png</b> and committed directly to your GitHub repository root folder.</p>
     </div>
     """, unsafe_allow_html=True)
 
