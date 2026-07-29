@@ -8,19 +8,19 @@ st.markdown("### Troubleshooting Durex / Extender Oil Flow Issues")
 
 st.info("This dashboard outlines common flow restrictions, root causes, and corrective actions for rubber process oil injection systems.")
 
-# Embedded HTML5 Canvas Fluid Animation to simulate oil flow & pump troubleshooting visually on Streamlit Cloud
+# Enhanced Fluid Animation Component (Fixed dimensions & smooth flow loop)
 st.subheader("Visual Process Oil Flow & Injection Animation")
 animation_html = """
 <!DOCTYPE html>
 <html>
 <head>
 <style>
-  body { margin: 0; background-color: #0e1117; color: white; font-family: sans-serif; text-align: center; }
+  body { margin: 0; background-color: #0e1117; color: white; font-family: sans-serif; text-align: center; display: flex; justify-content: center; align-items: center; height: 210px; }
   canvas { background: #1a1c23; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
 </style>
 </head>
 <body>
-<canvas id="oilCanvas" width="700" height="200"></canvas>
+<canvas id="oilCanvas" width="700" height="190"></canvas>
 <script>
   const canvas = document.getElementById("oilCanvas");
   const ctx = canvas.getContext("2d");
@@ -29,24 +29,24 @@ animation_html = """
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw Pipeline
-    ctx.fillStyle = "#333";
-    ctx.fillRect(50, 70, 600, 60);
+    // Draw Pipeline Background
+    ctx.fillStyle = "#262730";
+    ctx.fillRect(40, 65, 620, 50);
 
     // Draw Flow Particles (Oil Injection Simulation)
     ctx.fillStyle = "#ffcc00";
-    particleOffset = (particleOffset + 2) % 30;
-    for (let x = 60 - particleOffset; x < 640; x += 30) {
+    particleOffset = (particleOffset + 3) % 30;
+    for (let x = 50 - particleOffset; x < 670; x += 30) {
       ctx.beginPath();
-      ctx.arc(x, 100, 12, 0, Math.PI * 2);
+      ctx.arc(x, 90, 10, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    // Labels
+    // Labels & Indicators
     ctx.fillStyle = "#ffffff";
-    ctx.font = "14px sans-serif";
-    ctx.fillText("Gear Pump Supply Line", 70, 60);
-    ctx.fillText("Banbury Mixing Chamber Injection Nozzle ➔", 380, 155);
+    ctx.font = "13px sans-serif";
+    ctx.fillText("Gear Pump Supply Line ➔", 55, 50);
+    ctx.fillText("➔ Banbury Chamber Nozzle", 495, 142);
 
     requestAnimationFrame(draw);
   }
@@ -55,7 +55,7 @@ animation_html = """
 </body>
 </html>
 """
-components.html(animation_html, height=220)
+components.html(animation_html, height=210)
 
 # Troubleshooting Sections
 st.subheader("1. Low Oil Temperature / High Viscosity")
