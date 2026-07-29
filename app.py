@@ -8,7 +8,7 @@ st.markdown("### Troubleshooting Durex / Extender Oil Flow Issues")
 
 st.info("This dashboard outlines common flow restrictions, root causes, and corrective actions for rubber process oil injection systems.")
 
-# Enhanced Multi-Element Industrial Animation Component (Gear Pump + Flow + Nozzle Injection)
+# Polished Animation: Rotating Gear Pump pushing moving oil stream into the nozzle
 st.subheader("Visual Process Oil Flow & Injection Animation")
 animation_html = """
 <!DOCTYPE html>
@@ -30,55 +30,55 @@ animation_html = """
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // 1. Draw Gear Pump Housing (Left side)
+    // 1. Gear Pump Housing
     ctx.fillStyle = "#262730";
-    ctx.fillRect(30, 55, 90, 80);
+    ctx.fillRect(40, 50, 80, 90);
     ctx.strokeStyle = "#4f4f5f";
-    ctx.lineWidth = 3;
-    ctx.strokeRect(30, 55, 90, 80);
+    ctx.lineWidth = 2;
+    ctx.strokeRect(40, 50, 80, 90);
 
-    // Rotating Gear Teeth Indicator (Left)
+    // Rotating Gear Center
     ctx.save();
-    ctx.translate(75, 95);
+    ctx.translate(80, 95);
     ctx.rotate(angle);
     ctx.fillStyle = "#ffcc00";
-    for (let i = 0; i < 6; i++) {
-      ctx.rotate(Math.PI / 3);
-      ctx.fillRect(-6, -22, 12, 8);
+    for (let i = 0; i < 8; i++) {
+      ctx.rotate(Math.PI / 4);
+      ctx.fillRect(-5, -24, 10, 8);
     }
     ctx.beginPath();
     ctx.arc(0, 0, 10, 0, Math.PI * 2);
-    ctx.fillStyle = "#0e1117";
+    ctx.fillStyle = "#262730";
     ctx.fill();
     ctx.restore();
 
-    // 2. Draw Pipeline
+    // 2. Supply Pipeline
     ctx.fillStyle = "#262730";
-    ctx.fillRect(120, 75, 480, 40);
+    ctx.fillRect(120, 75, 460, 40);
 
-    // 3. Draw Moving Oil Flow Particles inside Pipeline
+    // 3. Moving Oil Flow Particles
     ctx.fillStyle = "#ffcc00";
-    particleOffset = (particleOffset + 3) % 30;
-    for (let x = 130 - particleOffset; x < 590; x += 30) {
+    particleOffset = (particleOffset + 3) % 25;
+    for (let x = 130 - particleOffset; x < 575; x += 25) {
       ctx.beginPath();
-      ctx.arc(x, 95, 8, 0, Math.PI * 2);
+      ctx.arc(x, 95, 7, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    // 4. Draw Banbury Chamber Injection Nozzle (Right side)
+    // 4. Mixing Chamber Nozzle Block (Right)
     ctx.fillStyle = "#3b3c4f";
-    ctx.fillRect(600, 45, 70, 100);
+    ctx.fillRect(580, 50, 75, 90);
     ctx.fillStyle = "#ff4b4b";
-    ctx.fillRect(610, 80, 20, 30); // Spray zone
+    ctx.fillRect(590, 80, 15, 30);
 
-    // 5. Labels & Text Indicators
+    // 5. Labels
     ctx.fillStyle = "#ffffff";
     ctx.font = "12px sans-serif";
-    ctx.fillText("Gear Pump", 45, 45);
-    ctx.fillText("Supply Line ➔", 280, 65);
-    ctx.fillText("Mixing Chamber Nozzle", 560, 165);
+    ctx.fillText("Gear Pump", 50, 42);
+    ctx.fillText("Supply Line ➔", 300, 65);
+    ctx.fillText("Mixing Chamber Nozzle", 545, 158);
 
-    angle += 0.05;
+    angle += 0.04;
     requestAnimationFrame(draw);
   }
   draw();
