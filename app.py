@@ -11,13 +11,20 @@ st.info("This dashboard outlines common flow restrictions, root causes, and corr
 # Displaying the comprehensive industrial troubleshooting visual overview grid
 st.subheader("Visual Troubleshooting Guide Grid")
 
-# Using a simplified, standard filename for the grid image to prevent path/name mismatch errors
+# If you prefer to embed the image directly via base64 so you don't even need to upload a separate file to GitHub, 
+# you can use an HTML wrapper, or keep checking for 'banbury_grid.png'. 
 image_filename = "banbury_grid.png"
 
 if os.path.exists(image_filename):
     st.image(image_filename, caption="Process Oil Pumping & Troubleshooting Matrix", use_column_width=True)
 else:
-    st.warning(f"Image file '{image_filename}' not found. Please save your generated grid image as **banbury_grid.png** and upload it to your GitHub repository folder.")
+    # Fallback option: displays a helpful instruction or you can place your image bytes directly.
+    st.markdown("""
+    <div style="padding: 20px; background-color: #1e1e2f; border-radius: 10px; border: 1px solid #4f4f5f; text-align: center;">
+        <p style="color: #ffcc00; font-weight: bold; margin-bottom: 10px;">📌 Action Required for GitHub Deployment:</p>
+        <p style="color: #ffffff; font-size: 14px;">Please save your generated 6-panel troubleshooting overview image as <b>banbury_grid.png</b> and commit it directly to your GitHub repository root folder.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 # Troubleshooting Sections
 st.subheader("1. Low Oil Temperature / High Viscosity")
