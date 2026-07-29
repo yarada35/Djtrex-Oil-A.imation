@@ -1,22 +1,25 @@
 import streamlit as st
-import os
 
-st.title("Banbury Mixer: Process Oil Troubleshooting Animation")
+st.set_page_config(page_title="Banbury Mixer Troubleshooting", layout="centered")
 
-st.markdown("""
-### Troubleshooting Durex / Extender Oil Flow Issues
-* **Cause:** Low temperature causes high viscosity and flow stalls.
-* **Fix:** Apply trace heating and line heaters to stabilize flow.
-""")
+st.title("🏭 Banbury Mixer: Process Oil Pumping Guide")
+st.markdown("### Troubleshooting Durex / Extender Oil Flow Issues")
 
-if st.button("Generate & Render Animation"):
-    with st.spinner("Rendering animation via Manim... Please wait."):
-        # Run manim via terminal command from python
-        os.system("manim -ql durex_pump_animation.py BanburyTroubleshooting")
-        
-        # Display the output video if generated successfully
-        video_path = "media/videos/durex_pump_animation/480p15/BanburyTroubleshooting.mp4"
-        if os.path.exists(video_path):
-            st.video(video_path)
-        else:
-            st.error("Rendering failed due to cloud environment limits. Try running Manim locally on your PC.")
+st.info("This dashboard outlines common flow restrictions, root causes, and corrective actions for rubber process oil injection systems.")
+
+# Troubleshooting Sections
+st.subheader("1. Low Oil Temperature / High Viscosity")
+st.write("**Cause:** Process oil becomes too thick if ambient or line temperatures drop, preventing smooth pumping.")
+st.success("**Fix:** Check line heaters and trace heating to maintain target fluid temperatures.")
+
+st.subheader("2. Premature Absorption or Blockage")
+st.write("**Cause:** Injection nozzles positioned too close to hot mixing zones cause rubber-oil caking and carbon black buildup.")
+st.success("**Fix:** Purge and clean the injection port regularly.")
+
+st.subheader("3. Air Pockets or Cavitation")
+st.write("**Cause:** Trapped air or foaming in the supply lines creates erratic positive displacement or gear pump delivery.")
+st.success("**Fix:** Bleed supply lines to remove trapped air pockets and restore uniform pressure.")
+
+st.subheader("4. Incorrect Injection Timing")
+st.write("**Cause:** Oil injected too early or late in the mixing cycle abruptly alters batch viscosity.")
+st.success("**Fix:** Verify PLC sequence triggers oil injection only after proper initial breakdown of polymers and fillers.")
