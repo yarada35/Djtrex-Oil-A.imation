@@ -1,5 +1,4 @@
 import streamlit as st
-import base64
 
 st.set_page_config(page_title="Banbury Mixer Troubleshooting", layout="centered")
 
@@ -10,13 +9,12 @@ st.info("This dashboard outlines common flow restrictions, root causes, and corr
 
 st.subheader("Visual Troubleshooting Guide Grid")
 
-# Embedded base64 representation of your 4-panel troubleshooting grid image 
-# so it renders instantly in your Streamlit Cloud app without requiring a separate file upload!
-grid_base64 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
+# Displaying the image directly using a standard markdown/HTML image tag referencing an accessible public image URL or direct base64
+image_url = "https://i.ibb.co/3s7N9r3/watermarked-img-378759811578840393.png"
 
 st.markdown(f"""
 <div style="text-align: center; margin-bottom: 20px;">
-    <img src="data:image/png;base64,{grid_base64}" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);" alt="Troubleshooting Grid">
+    <img src="{image_url}" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);" alt="Troubleshooting Grid">
 </div>
 """, unsafe_allow_html=True)
 
