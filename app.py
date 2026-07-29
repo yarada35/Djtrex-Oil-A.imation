@@ -11,13 +11,13 @@ st.info("This dashboard outlines common flow restrictions, root causes, and corr
 # Displaying the comprehensive industrial troubleshooting visual overview grid
 st.subheader("Visual Troubleshooting Guide Grid")
 
-# Check for the image filename matching what was generated
-image_filename = "watermarked_img_378759811578840393.png"
+# Using a simplified, standard filename for the grid image to prevent path/name mismatch errors
+image_filename = "banbury_grid.png"
 
 if os.path.exists(image_filename):
     st.image(image_filename, caption="Process Oil Pumping & Troubleshooting Matrix", use_column_width=True)
 else:
-    st.warning(f"Image file '{image_filename}' not found in repository. Please upload it to your GitHub folder or check the filename.")
+    st.warning(f"Image file '{image_filename}' not found. Please save your generated grid image as **banbury_grid.png** and upload it to your GitHub repository folder.")
 
 # Troubleshooting Sections
 st.subheader("1. Low Oil Temperature / High Viscosity")
