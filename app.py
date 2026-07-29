@@ -7,6 +7,15 @@ st.markdown("### Troubleshooting Durex / Extender Oil Flow Issues")
 
 st.info("This dashboard outlines common flow restrictions, root causes, and corrective actions for rubber process oil injection systems.")
 
+# --- ADDED: Video Animation Section ---
+st.subheader("Visual Troubleshooting Animation")
+try:
+    # Replace 'animation.mp4' with the actual filename of your exported video
+    st.video("animation.mp4")
+except Exception:
+    st.warning("Animation video file not found in repository. Please upload your rendered .mp4 file.")
+# -------------------------------------
+
 # Troubleshooting Sections
 st.subheader("1. Low Oil Temperature / High Viscosity")
 st.write("**Cause:** Process oil becomes too thick if ambient or line temperatures drop, preventing smooth pumping.")
