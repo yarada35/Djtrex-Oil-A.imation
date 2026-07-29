@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 
 st.set_page_config(page_title="Banbury Mixer Troubleshooting", layout="centered")
 
@@ -9,11 +10,14 @@ st.info("This dashboard outlines common flow restrictions, root causes, and corr
 
 # Displaying the comprehensive industrial troubleshooting visual overview grid
 st.subheader("Visual Troubleshooting Guide Grid")
-try:
-    # Place your generated multi-panel image file into your GitHub repo folder
-    st.image("banbury_troubleshooting_grid.png", caption="Process Oil Pumping & Troubleshooting Matrix", use_column_width=True)
-except Exception:
-    st.warning("Image file 'banbury_troubleshooting_grid.png' not found in repository. Please upload the generated grid image to display it here.")
+
+# Check for the image filename matching what was generated
+image_filename = "watermarked_img_378759811578840393.png"
+
+if os.path.exists(image_filename):
+    st.image(image_filename, caption="Process Oil Pumping & Troubleshooting Matrix", use_column_width=True)
+else:
+    st.warning(f"Image file '{image_filename}' not found in repository. Please upload it to your GitHub folder or check the filename.")
 
 # Troubleshooting Sections
 st.subheader("1. Low Oil Temperature / High Viscosity")
