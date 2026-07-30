@@ -10,9 +10,9 @@ st.info("This dashboard outlines common flow restrictions, root causes, and corr
 
 st.subheader("Visual Troubleshooting Guide Video")
 
-# Check for video file variants in the GitHub repository working directory
-video_filename = "dutrex oil.mp4"
-alt_filename = "dutrex_oil.mp4"
+# Automatically check for the video file in the GitHub repository root
+video_filename = "dutrex_oil.mp4"
+alt_filename = "dutrex oil.mp4"
 
 target_video = None
 if os.path.exists(video_filename):
@@ -23,13 +23,13 @@ elif os.path.exists(alt_filename):
 if target_video:
     st.video(target_video)
 else:
-    # Interactive video uploader fallback if the video isn't committed in the root directory yet
+    # Fallback uploader if the file hasn't been pushed to GitHub yet
     uploaded_video = st.file_uploader("Upload your Troubleshooting Matrix Video (.mp4)", type=["mp4", "mov", "avi"])
     
     if uploaded_video is not None:
         st.video(uploaded_video)
     else:
-        st.warning(f"Please upload your matrix video above or ensure **{video_filename}** is committed directly to your GitHub repository folder.")
+        st.warning(f"Please commit **{video_filename}** directly to your GitHub repository folder or upload it above.")
 
 # Troubleshooting Sections
 st.subheader("1. Low Oil Temperature / High Viscosity")
