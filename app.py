@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 
 st.set_page_config(page_title="Banbury Mixer Troubleshooting", layout="centered")
 
@@ -7,16 +8,29 @@ st.markdown("### Troubleshooting Durex / Extender Oil Flow Issues")
 
 st.info("This dashboard outlines common flow restrictions, root causes, and corrective actions for rubber process oil injection systems.")
 
-st.subheader("Visual Troubleshooting Guide Video")
+st.subheader("Visual Troubleshooting Guide")
 
-# Replace this placeholder link with your direct hosted video link (.mp4)
-# (e.g., from a GitHub Release download link or any direct URL)
-video_url = st.text_input("Enter Direct Video URL (.mp4)", "https://www.w3schools.com/html/mov_bbb.mp4")
+# Automatically display the troubleshooting matrix image directly without text input boxes or video placeholders
+image_filename = "dutrex oil.png"
+alt_filename = "dutrex_oil.png"
+alt_filename_2 = "dutrex oil_2.png"
 
-if video_url:
-    st.video(video_url)
+target_image = None
+if os.path.exists(image_filename):
+    target_image = image_filename
+elif os.path.exists(alt_filename):
+    target_image = alt_filename
+elif os.path.exists(alt_filename_2):
+    target_image = alt_filename_2
+
+if target_image:
+    st.image(target_image, caption="Process Oil Pumping & Troubleshooting Matrix", use_column_width=True)
 else:
-    st.warning("Please provide a direct video URL above.")
+    uploaded_file = st.file_uploader("Upload your Troubleshooting Matrix Image (.png or .jpg)", type=["png", "jpg", "jpeg"])
+    if uploaded_file is not None:
+        st.image(uploaded_file, caption="Process Oil Pumping & Troubleshooting Matrix", use_column_width=True)
+    else:
+        st.warning(f"Please commit **{image_filename}** directly to your GitHub repository folder or upload it above.")
 
 # Troubleshooting Sections
 st.subheader("1. Low Oil Temperature / High Viscosity")
