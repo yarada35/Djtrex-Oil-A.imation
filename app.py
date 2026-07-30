@@ -8,57 +8,80 @@ st.markdown("### Troubleshooting Durex / Extender Oil Flow Issues")
 
 st.info("This dashboard outlines common flow restrictions, root causes, and corrective actions for rubber process oil injection systems.")
 
-st.subheader("Interactive Step-by-Step Troubleshooting Viewer")
+st.subheader("Interactive Engineering Troubleshooting Sequences")
 
-# Allow manual upload of the multi-panel picture file
+# Allow manual upload of the comprehensive matrix image file
 uploaded_file = st.file_uploader("Upload your Troubleshooting Matrix Image (.png or .jpg)", type=["png", "jpg", "jpeg"])
 
 if uploaded_file is not None:
     img = Image.open(uploaded_file)
     width, height = img.size
 
-    # Crop the 4 individual panels from the single image grid to display them dynamically like an animated sequence
-    # Layout assumed: 2 rows x 3 columns or split quarters
-    # Let's crop into 4 distinct troubleshooting quadrants:
-    box_cause1 = (0, 0, width // 2, height // 2)
-    box_cause2 = (width // 2, 0, width, height // 2)
-    box_cause3 = (0, height // 2, width // 3, height)
-    box_cause4 = (width // 2, height // 2, width, height)
+    # Precise crop boxes matching the exact 2x3 panel layout of your image grid:
+    # Top Row: Cause 1 (Left half of top), Cause 2 (Right half of top)
+    # Bottom Row: Cause 3 (Left third), Conclusion (Middle third), Cause 4 (Right third)
+    box_c1 = (0, 0, width // 2, height // 2)
+    box_c2 = (width // 2, 0, width, height // 2)
+    box_c3 = (0, height // 2, width // 3, height)
+    box_conclusion = (width // 3, height // 2, 2 * (width // 3), height)
+    box_c4 = (2 * (width // 3), height // 2, width, height)
 
-    # Use radio buttons for smooth, reliable switching without page-refresh blinking
-    step = st.radio(
-        "Select Troubleshooting Focus Area (Simulated Video Frames):",
-        ("Frame 1: Cause 1 & 2 (Viscosity & Nozzle Caking)", 
-         "Frame 2: Cause 3 (Air Pockets & Cavitation)", 
-         "Frame 3: Cause 4 (Injection Timing & Viscosity)", 
-         "Frame 4: Full Summary Matrix View"),
-        horizontal=True
+    # Professional selection tabs mapped directly to your technical scenarios
+    scene_option = st.radio(
+        "Select Troubleshooting Scene Sequence:",
+        (
+            "Scene 2: Cause 1 — Low Oil Temp & High Viscosity",
+            "Scene 3: Cause 2 — Nozzle Blockage (Caking)",
+            "Scene 4: Cause 3 — Air Pockets & Cavitation",
+            "Scene 5: Cause 4 — Incorrect Injection Timing",
+            "Scene 6: Conclusion / Full Matrix Overview"
+        ),
+        horizontal=False
     )
 
-    if "Frame 1" in step:
-        col_a, col_b = st.columns(2)
-        with col_a:
-            st.image(img.crop((0, 0, width // 2, height // 2)), caption="Cause 1: Low Oil Temp & Viscosity", use_column_width=True)
-        with col_b:
-            st.image(img.crop((width // 2, 0, width, height // 2)), caption="Cause 2: Nozzle Blockage (Caking)", use_column_width=True)
-        st.success("🔍 **Active Analysis:** Inspecting cold oil thickening and carbon black nozzle buildup.")
-        
-    elif "Frame 2" in step:
-        st.image(img.crop((0, height // 2, width // 2, height)), caption="Cause 3: Air Pockets & Cavitation in Gear Pumps", use_column_width=True)
-        st.success("🔍 **Active Analysis:** Checking positive displacement pump line aeration and pressure drops.")
-        
-    elif "Frame 3" in step:
-        st.image(img.crop((width // 2, height // 2, width, height)), caption="Cause 4: Incorrect Injection Timing & Batch Viscosity", use_column_width=True)
-        st.success("🔍 **Active Analysis:** Verifying PLC trigger windows against the batch viscosity curve.")
-        
+    if "Scene 2" in scene_option:
+        st.image(img.crop(box_c1), use_column_width=True)
+        st.markdown("### Scene 2: Cause 1 — Low Oil Temperature & High Viscosity")
+        st.write("**Visual:** A macro-photographic close-up of the pipeline. An industrial-grade bimetallic thermometer probe reads 15°C. Process oil appears dark, cloudy, and sluggish in thick gelatinous clumps.")
+        st.success("**Solution Visual:** Trace heating toggle switches to 'ON'. A shimmering heat haze ripples around the pipe, instantly turning the oil clear, amber, and fast-flowing.")
+        st.info("**On-Screen Text:**\n* **Cause:** Low Temp / High Viscosity\n* **Fix:** Check Line Heaters & Trace Heating")
+
+    elif "Scene 3" in scene_option:
+        st.image(img.crop(box_c2), use_column_width=True)
+        st.markdown("### Scene 3: Cause 2 — Nozzle Blockage (Caking)")
+        st.write("**Visual:** Close-up inside the open throat of the Banbury mixing chamber. The nozzle port is completely encased in a hard, black, carbonized crust of baked rubber and soot.")
+        st.success("**Solution Visual:** A maintenance dry-ice blaster tool targets the tip, rapidly blasting away the black crust to reveal a clean, wide-open spray port.")
+        st.info("**On-Screen Text:**\n* **Cause:** Premature Absorption & Nozzle Caking\n* **Fix:** Inspect, Purge, and Clean Nozzles")
+
+    elif "Scene 4" in scene_option:
+        st.image(img.crop(box_c3), use_column_width=True)
+        st.markdown("### Scene 4: Cause 3 — Air Pockets & Cavitation")
+        st.write("**Visual:** Industrial cutaway of the process oil gear pump. Large air bubbles are trapped between meshing gear teeth, causing stuttering delivery. Discharge pressure gauge wildly swings between 2 bar and 10 bar.")
+        st.success("**Solution Visual:** Bleed valve turns green and purges trapped air/oil spray. Pressure gauge locks dead-center at 7 bar in the green zone, and gear pump spins smoothly.")
+        st.info("**On-Screen Text:**\n* **Cause:** Air Pockets & Cavitation\n* **Fix:** Bleed Supply Lines & Restore Pressure")
+
+    elif "Scene 5" in scene_option:
+        st.image(img.crop(box_c4), use_column_width=True)
+        st.markdown("### Scene 5: Cause 4 — Incorrect Injection Timing")
+        st.write("**Visual:** Internal view of counter-rotating Banbury rotors shearing solid polymer. Oil injected too early sits as an idle pool, causing batch viscosity curve to slump sharply.")
+        st.success("**Solution Visual:** PLC timeline shifts oil injection two phases later during high-shear phase. Oil sprays as a fine mist, and torque curve stabilizes into a smooth operational waveform.")
+        st.info("**On-Screen Text:**\n* **Cause:** Incorrect Injection Timing\n* **Fix:** Verify PLC Sequence & Injection Point")
+
     else:
-        st.image(img, caption="Complete Troubleshooting & Summary Matrix", use_column_width=True)
-        st.success("🔍 **Active Analysis:** Full overview of all operational failure modes and corrective actions.")
+        col_left, col_right = st.columns(2)
+        with col_left:
+            st.image(img.crop(box_conclusion), use_column_width=True)
+        with col_right:
+            st.image(img, use_column_width=True)
+        st.markdown("### Scene 6: Conclusion / Call to Action")
+        st.write("**Visual:** Split-screen industrial view showing rapid oil flow, clean mixing chambers, and stable waveform monitoring.")
+        st.success("**Summary Checklist:**\n1. Verify Temp/Viscosity\n2. Inspect & Purge Nozzles\n3. Bleed Lines\n4. Check PLC Timing")
 
 else:
-    st.warning("Please upload your **dutrex oil.png** image file above to initialize the interactive step viewer.")
+    st.warning("Please upload your **dutrex oil.png** image file above to activate the scene-by-scene troubleshooting player.")
 
-# Troubleshooting Sections
+# Static Engineering Reference Sections Below
+st.markdown("---")
 st.subheader("1. Low Oil Temperature / High Viscosity")
 st.write("**Cause:** Process oil becomes too thick if ambient or line temperatures drop, preventing smooth pumping.")
 st.success("**Fix:** Check line heaters and trace heating to maintain target fluid temperatures.")
