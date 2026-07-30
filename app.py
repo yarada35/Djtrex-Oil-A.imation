@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 
 st.set_page_config(page_title="Banbury Mixer Troubleshooting", layout="centered")
 
@@ -9,19 +10,26 @@ st.info("This dashboard outlines common flow restrictions, root causes, and corr
 
 st.subheader("Visual Troubleshooting Guide Grid")
 
-# Reliable multi-fallback approach for rendering the image on Streamlit Cloud
-uploaded_file = st.file_uploader("Upload your Troubleshooting Matrix Image (.png or .jpg)", type=["png", "jpg", "jpeg"])
+# Automatically check if the image file exists locally in the repository workspace
+image_filename = "dutrex oil.png"
+alt_filename = "dutrex_oil.png"
 
-if uploaded_file is not None:
-    st.image(uploaded_file, caption="Process Oil Pumping & Troubleshooting Matrix", use_column_width=True)
+target_file = None
+if os.path.exists(image_filename):
+    target_file = image_filename
+elif os.path.exists(alt_filename):
+    target_file = alt_filename
+
+if target_file:
+    st.image(target_file, caption="Process Oil Pumping & Troubleshooting Matrix", use_column_width=True)
 else:
-    # Fallback to direct markdown image link or placeholder notice
-    image_url = "https://i.ibb.co/3s7N9r3/watermarked-img-378759811578840393.png"
-    st.markdown(f"""
-    <div style="text-align: center; margin-bottom: 20px;">
-        <img src="{image_url}" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);" alt="Troubleshooting Grid">
-    </div>
-    """, unsafe_allow_html=True)
+    # Interactive file uploader fallback if the file isn't found in the root directory yet
+    uploaded_file = st.file_uploader("Upload your Troubleshooting Matrix Image (.png or .jpg)", type=["png", "jpg", "jpeg"])
+    
+    if uploaded_file is not None:
+        st.image(uploaded_file, caption="Process Oil Pumping & Troubleshooting Matrix", use_column_width=True)
+    else:
+        st.warning(f"Please upload your matrix image above or ensure **{image_filename}** is committed directly to your repository folder.")
 
 # Troubleshooting Sections
 st.subheader("1. Low Oil Temperature / High Viscosity")
