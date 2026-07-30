@@ -8,9 +8,9 @@ st.markdown("### Troubleshooting Durex / Extender Oil Flow Issues")
 
 st.info("This dashboard outlines common flow restrictions, root causes, and corrective actions for rubber process oil injection systems.")
 
-st.subheader("Visual Troubleshooting Guide Matrix")
+st.subheader("Animated Visual Troubleshooting Guide")
 
-# Automatically detect and display your exact troubleshooting image file
+# Automatically detect the static image file to use as the base for the animated layout
 image_filename = "dutrex oil.png"
 alt_filename = "dutrex_oil.png"
 
@@ -20,13 +20,43 @@ if os.path.exists(image_filename):
 elif os.path.exists(alt_filename):
     target_image = alt_filename
 
+# Inject custom CSS animation so the image gently pulses and loops like a video transition
+st.markdown("""
+<style>
+@keyframes pulseAnimation {
+  0% { transform: scale(1); opacity: 0.95; box-shadow: 0 0 0px rgba(0, 150, 255, 0); }
+  50% { transform: scale(1.01); opacity: 1; box-shadow: 0 0 15px rgba(0, 150, 255, 0.4); }
+  100% { transform: scale(1); opacity: 0.95; box-shadow: 0 0 0px rgba(0, 150, 255, 0); }
+}
+.animated-container {
+  animation: pulseAnimation 4s infinite ease-in-out;
+  border-radius: 10px;
+  overflow: hidden;
+}
+</style>
+""", unsafe_allow_html=True)
+
 if target_image:
-    st.image(target_image, caption="Process Oil Pumping & Troubleshooting Matrix (Causes 1 to 4)", use_column_width=True)
+    # Display the image wrapped in the animated container div
+    st.markdown('<div class="animated-container">', unsafe_allow_html=True)
+    st.image(target_image, use_column_width=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Interactive timeline progress slider simulating video playback frames
+    animation_step = st.slider("Troubleshooting Sequence Timeline (Step-by-Step Animation)", 1, 4, 1)
+    
+    if animation_step == 1:
+        st.caption("▶ **Phase 1 Active:** Examining Cause 1 (Low Oil Temperature & High Viscosity) & Cause 2 (Nozzle Caking).")
+    elif animation_step == 2:
+        st.caption("▶ **Phase 2 Active:** Inspecting Cause 3 (Air Pockets & Cavitation in Gear Pumps).")
+    elif animation_step == 3:
+        st.caption("▶ **Phase 3 Active:** Reviewing Cause 4 (Incorrect Injection Timing & Batch Viscosity Curve).")
+    else:
+        st.caption("▶ **Phase 4 Active:** Summary Checklist & Call to Action.")
 else:
-    # Fallback file uploader if the image file isn't found in the repo folder yet
     uploaded_file = st.file_uploader("Upload your Troubleshooting Matrix Image (.png or .jpg)", type=["png", "jpg", "jpeg"])
     if uploaded_file is not None:
-        st.image(uploaded_file, caption="Process Oil Pumping & Troubleshooting Matrix", use_column_width=True)
+        st.image(uploaded_file, use_column_width=True)
     else:
         st.warning(f"Please ensure **{image_filename}** is committed directly to your GitHub repository folder.")
 
