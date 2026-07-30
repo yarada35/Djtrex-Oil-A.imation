@@ -10,7 +10,7 @@ st.info("This dashboard outlines common flow restrictions, root causes, and corr
 
 st.subheader("Visual Troubleshooting Guide Video")
 
-# Automatically check for the video file in the GitHub repository root
+# Look for video file names in the repository root directory
 video_filename = "dutrex_oil.mp4"
 alt_filename = "dutrex oil.mp4"
 
@@ -21,15 +21,18 @@ elif os.path.exists(alt_filename):
     target_video = alt_filename
 
 if target_video:
-    st.video(target_video)
+    # Read the file as binary bytes to guarantee proper stream delivery in Streamlit Cloud
+    video_file = open(target_video, 'rb')
+    video_bytes = video_file.read()
+    st.video(video_bytes)
 else:
-    # Fallback uploader if the file hasn't been pushed to GitHub yet
+    # Fallback uploader if the file is too large for GitHub or missing
     uploaded_video = st.file_uploader("Upload your Troubleshooting Matrix Video (.mp4)", type=["mp4", "mov", "avi"])
     
     if uploaded_video is not None:
         st.video(uploaded_video)
     else:
-        st.warning(f"Please commit **{video_filename}** directly to your GitHub repository folder or upload it above.")
+        st.warning(f"⚠️ Video file **{video_filename}** was not found in your repository root (possibly due to GitHub's 100MB file size limit). Please upload your video file directly using the uploader above.")
 
 # Troubleshooting Sections
 st.subheader("1. Low Oil Temperature / High Viscosity")
