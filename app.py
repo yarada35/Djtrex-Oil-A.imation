@@ -8,33 +8,28 @@ st.markdown("### Troubleshooting Durex / Extender Oil Flow Issues")
 
 st.info("This dashboard outlines common flow restrictions, root causes, and corrective actions for rubber process oil injection systems.")
 
-st.subheader("Visual Troubleshooting Guide Grid")
+st.subheader("Visual Troubleshooting Guide Video")
 
-# Check for both filename variants in the working directory
-image_filename = "dutrex oil.png"
-alt_filename = "dutrex_oil.png"
+# Check for video file variants in the GitHub repository working directory
+video_filename = "dutrex oil.mp4"
+alt_filename = "dutrex_oil.mp4"
 
-target_file = None
-if os.path.exists(image_filename):
-    target_file = image_filename
+target_video = None
+if os.path.exists(video_filename):
+    target_video = video_filename
 elif os.path.exists(alt_filename):
-    target_file = alt_filename
+    target_video = alt_filename
 
-if target_file:
-    st.image(target_file, caption="Process Oil Pumping & Troubleshooting Matrix", use_column_width=True)
+if target_video:
+    st.video(target_video)
 else:
-    # Fallback to direct raw bytes base64 rendering so it shows instantly without requiring a manual git commit or upload
-    fallback_base64 = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
-    st.markdown(f"""
-    <div style="text-align: center; margin-bottom: 20px;">
-        <img src="data:image/png;base64,{fallback_base64}" style="max-width: 100%; border-radius: 8px;" alt="Placeholder Grid">
-    </div>
-    """, unsafe_allow_html=True)
+    # Interactive video uploader fallback if the video isn't committed in the root directory yet
+    uploaded_video = st.file_uploader("Upload your Troubleshooting Matrix Video (.mp4)", type=["mp4", "mov", "avi"])
     
-    # Optional uploader if the user still prefers uploading on the fly
-    uploaded_file = st.file_uploader("Or upload your Troubleshooting Matrix Image (.png or .jpg)", type=["png", "jpg", "jpeg"])
-    if uploaded_file is not None:
-        st.image(uploaded_file, caption="Process Oil Pumping & Troubleshooting Matrix", use_column_width=True)
+    if uploaded_video is not None:
+        st.video(uploaded_video)
+    else:
+        st.warning(f"Please upload your matrix video above or ensure **{video_filename}** is committed directly to your GitHub repository folder.")
 
 # Troubleshooting Sections
 st.subheader("1. Low Oil Temperature / High Viscosity")
