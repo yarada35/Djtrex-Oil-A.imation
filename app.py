@@ -1,5 +1,4 @@
 import streamlit as st
-import os
 
 st.set_page_config(page_title="Banbury Mixer Troubleshooting", layout="centered")
 
@@ -10,29 +9,14 @@ st.info("This dashboard outlines common flow restrictions, root causes, and corr
 
 st.subheader("Visual Troubleshooting Guide Video")
 
-# Look for video file names in the repository root directory
-video_filename = "dutrex_oil.mp4"
-alt_filename = "dutrex oil.mp4"
+# Replace this placeholder link with your direct hosted video link (.mp4)
+# (e.g., from a GitHub Release download link or any direct URL)
+video_url = st.text_input("Enter Direct Video URL (.mp4)", "https://www.w3schools.com/html/mov_bbb.mp4")
 
-target_video = None
-if os.path.exists(video_filename):
-    target_video = video_filename
-elif os.path.exists(alt_filename):
-    target_video = alt_filename
-
-if target_video:
-    # Read the file as binary bytes to guarantee proper stream delivery in Streamlit Cloud
-    video_file = open(target_video, 'rb')
-    video_bytes = video_file.read()
-    st.video(video_bytes)
+if video_url:
+    st.video(video_url)
 else:
-    # Fallback uploader if the file is too large for GitHub or missing
-    uploaded_video = st.file_uploader("Upload your Troubleshooting Matrix Video (.mp4)", type=["mp4", "mov", "avi"])
-    
-    if uploaded_video is not None:
-        st.video(uploaded_video)
-    else:
-        st.warning(f"⚠️ Video file **{video_filename}** was not found in your repository root (possibly due to GitHub's 100MB file size limit). Please upload your video file directly using the uploader above.")
+    st.warning("Please provide a direct video URL above.")
 
 # Troubleshooting Sections
 st.subheader("1. Low Oil Temperature / High Viscosity")
