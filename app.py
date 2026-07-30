@@ -8,29 +8,27 @@ st.markdown("### Troubleshooting Durex / Extender Oil Flow Issues")
 
 st.info("This dashboard outlines common flow restrictions, root causes, and corrective actions for rubber process oil injection systems.")
 
-st.subheader("Visual Troubleshooting Guide")
+st.subheader("Visual Troubleshooting Guide Matrix")
 
-# Automatically display the troubleshooting matrix image directly without text input boxes or video placeholders
+# Automatically detect and display your exact troubleshooting image file
 image_filename = "dutrex oil.png"
 alt_filename = "dutrex_oil.png"
-alt_filename_2 = "dutrex oil_2.png"
 
 target_image = None
 if os.path.exists(image_filename):
     target_image = image_filename
 elif os.path.exists(alt_filename):
     target_image = alt_filename
-elif os.path.exists(alt_filename_2):
-    target_image = alt_filename_2
 
 if target_image:
-    st.image(target_image, caption="Process Oil Pumping & Troubleshooting Matrix", use_column_width=True)
+    st.image(target_image, caption="Process Oil Pumping & Troubleshooting Matrix (Causes 1 to 4)", use_column_width=True)
 else:
+    # Fallback file uploader if the image file isn't found in the repo folder yet
     uploaded_file = st.file_uploader("Upload your Troubleshooting Matrix Image (.png or .jpg)", type=["png", "jpg", "jpeg"])
     if uploaded_file is not None:
         st.image(uploaded_file, caption="Process Oil Pumping & Troubleshooting Matrix", use_column_width=True)
     else:
-        st.warning(f"Please commit **{image_filename}** directly to your GitHub repository folder or upload it above.")
+        st.warning(f"Please ensure **{image_filename}** is committed directly to your GitHub repository folder.")
 
 # Troubleshooting Sections
 st.subheader("1. Low Oil Temperature / High Viscosity")
