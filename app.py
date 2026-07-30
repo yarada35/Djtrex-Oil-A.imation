@@ -1,5 +1,5 @@
 import streamlit as st
-import os
+import time
 
 st.set_page_config(page_title="Banbury Mixer Troubleshooting", layout="centered")
 
@@ -8,57 +8,41 @@ st.markdown("### Troubleshooting Durex / Extender Oil Flow Issues")
 
 st.info("This dashboard outlines common flow restrictions, root causes, and corrective actions for rubber process oil injection systems.")
 
-st.subheader("Animated Visual Troubleshooting Guide")
+st.subheader("Animated Troubleshooting Guide Player")
 
-# Automatically detect the static image file to use as the base for the animated layout
-image_filename = "dutrex oil.png"
-alt_filename = "dutrex_oil.png"
+# Allow manual upload of the picture file
+uploaded_file = st.file_uploader("Upload your Troubleshooting Matrix Image (.png or .jpg)", type=["png", "jpg", "jpeg"])
 
-target_image = None
-if os.path.exists(image_filename):
-    target_image = image_filename
-elif os.path.exists(alt_filename):
-    target_image = alt_filename
-
-# Inject custom CSS animation so the image gently pulses and loops like a video transition
-st.markdown("""
-<style>
-@keyframes pulseAnimation {
-  0% { transform: scale(1); opacity: 0.95; box-shadow: 0 0 0px rgba(0, 150, 255, 0); }
-  50% { transform: scale(1.01); opacity: 1; box-shadow: 0 0 15px rgba(0, 150, 255, 0.4); }
-  100% { transform: scale(1); opacity: 0.95; box-shadow: 0 0 0px rgba(0, 150, 255, 0); }
-}
-.animated-container {
-  animation: pulseAnimation 4s infinite ease-in-out;
-  border-radius: 10px;
-  overflow: hidden;
-}
-</style>
-""", unsafe_allow_html=True)
-
-if target_image:
-    # Display the image wrapped in the animated container div
-    st.markdown('<div class="animated-container">', unsafe_allow_html=True)
-    st.image(target_image, use_column_width=True)
-    st.markdown('</div>', unsafe_allow_html=True)
+if uploaded_file is not None:
+    # Interactive playback controls simulating a video player
+    col1, col2, col3 = st.columns([1, 1, 2])
+    play_animation = col1.button("▶ Play Animation")
+    pause_animation = col2.button("⏸ Pause")
     
-    # Interactive timeline progress slider simulating video playback frames
-    animation_step = st.slider("Troubleshooting Sequence Timeline (Step-by-Step Animation)", 1, 4, 1)
+    # Session state for frame-by-frame animation simulation
+    if 'frame' not in st.session_state:
+        st.session_state.frame = 1
+
+    if play_animation:
+        for i in range(1, 5):
+            st.session_state.frame = i
+            time.sleep(1.5)
+            st.rerun()
+
+    # Display the image with dynamic visual highlights based on the active troubleshooting step
+    st.image(uploaded_file, caption=f"Active Playback Frame: Step {st.session_state.frame} of 4", use_column_width=True)
     
-    if animation_step == 1:
-        st.caption("▶ **Phase 1 Active:** Examining Cause 1 (Low Oil Temperature & High Viscosity) & Cause 2 (Nozzle Caking).")
-    elif animation_step == 2:
-        st.caption("▶ **Phase 2 Active:** Inspecting Cause 3 (Air Pockets & Cavitation in Gear Pumps).")
-    elif animation_step == 3:
-        st.caption("▶ **Phase 3 Active:** Reviewing Cause 4 (Incorrect Injection Timing & Batch Viscosity Curve).")
+    # Step descriptions matching the video frames
+    if st.session_state.frame == 1:
+        st.success("🎥 **Playing [0:00 - 0:15]:** Cause 1 (Low Oil Temp & High Viscosity) & Cause 2 (Nozzle Caking).")
+    elif st.session_state.frame == 2:
+        st.success("🎥 **Playing [0:15 - 0:30]:** Cause 3 (Air Pockets & Cavitation in Gear Pumps).")
+    elif st.session_state.frame == 3:
+        st.success("🎥 **Playing [0:30 - 0:45]:** Cause 4 (Incorrect Injection Timing & Viscosity Curve).")
     else:
-        st.caption("▶ **Phase 4 Active:** Summary Checklist & Call to Action.")
+        st.success("🎥 **Playing [0:45 - 1:00]:** Conclusion & Summary Checklist.")
 else:
-    uploaded_file = st.file_uploader("Upload your Troubleshooting Matrix Image (.png or .jpg)", type=["png", "jpg", "jpeg"])
-    if uploaded_file is not None:
-        st.image(uploaded_file, use_column_width=True)
-    else:
-        st.warning(f"Please ensure **{image_filename}** is committed directly to your GitHub repository folder.")
+    st.warning("Please upload your **dutrex oil.png** image above to start the interactive visual player.")
 
 # Troubleshooting Sections
 st.subheader("1. Low Oil Temperature / High Viscosity")
